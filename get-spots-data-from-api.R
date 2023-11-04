@@ -1,8 +1,4 @@
 library(httr2)
-library(tidyverse)
-library(sf)
-library(lutz)
-library(hms)
 
 req <- request("https://api2.sota.org.uk/api/")
 

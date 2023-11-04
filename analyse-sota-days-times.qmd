@@ -13,20 +13,7 @@ library(hms)
 
 req <- request("https://api2.sota.org.uk/api/")
 
-# get 1000 or so of the most recent spots
-# https://api2.sota.org.uk/docs/index.html
-# "The parameter limit is an integer which when unsigned 
-# defines the number of spots to retrieve (max 200)
-#  and when signed, the number of hours' worth of 
-# Spots (max 72 hours)"
-resp_spot <- req %>% 
-  req_url_path_append("spots") %>% 
-  req_url_path_append("-72") %>% 
-  # Add query parameters 
-  req_url_query(
-                `filter` = "all") %>% 
-  req_perform() %>% 
-  resp_body_json() 
+# getting spots is documented in the R script file
 ```
 
 
