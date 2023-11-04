@@ -1,5 +1,5 @@
 Package: sotatimesdays
-Title: Investigate the chronological distribution of SOTA spots
+Title: Investigating the chronological distribution of SOTA spots
 Version: 1.0.0
 Authors@R: 
     person(given = "Ben",
