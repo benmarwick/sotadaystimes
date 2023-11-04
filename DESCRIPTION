@@ -8,7 +8,7 @@ Authors@R:
            email = "benmarwick@gmail.com")
 Description: Contains code and data for the analysis
 Imports:
-    httr
+    httr2
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
