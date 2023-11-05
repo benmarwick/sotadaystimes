@@ -1,4 +1,5 @@
 library(httr2)
+library(jsonlite)
 
 req <- request("https://api2.sota.org.uk/api/")
 
