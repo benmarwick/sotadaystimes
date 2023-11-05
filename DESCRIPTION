@@ -8,7 +8,7 @@ Authors@R:
            email = "benmarwick@gmail.com")
 Description: Contains code and data for the analysis
 Imports:
-    httr2
+    httr2,
     jsonlite
 License: MIT + file LICENSE
 Encoding: UTF-8
