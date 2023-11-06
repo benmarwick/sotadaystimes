@@ -34,6 +34,7 @@ jobs:
       - name: Generate data
         run: |
           source("get-spots-data-from-api.R")
+          quarto::quarto_render("README.qmd")
         shell: Rscript {0} 
         
       - name: Commit files
