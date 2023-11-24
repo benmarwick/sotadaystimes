@@ -1,5 +1,5 @@
 # When do SOTA Activators post their spots?
-2023-11-23
+2023-11-24
 
 The goal of this project is to find the best times to be on a SOTA
 summit to have a summit-to-summit contact.
@@ -22,7 +22,7 @@ resp_spot <- readRDS(most_recent_file)
 # getting spots is documented in the R script file
 ```
 
-These data are from the 72 h leading up to 2023-11-23 01:05. The data
+These data are from the 72 h leading up to 2023-11-24 01:05. The data
 are collected by a GitHub Action that is set to run every 72 h.
 
 ``` r
@@ -136,7 +136,7 @@ id="fig-by-hour"
 alt="Figure 2: Frequency of spots by time of the day in the activator’s time zone" />
 
 Midday is peak hour for spotting. Fifty percent of spots were posted
-between 10:25 and 13:47 in the activator’s local time zone.
+between 10:46 and 13:44 in the activator’s local time zone.
 
 ``` r
 small_x_labels <- 3
