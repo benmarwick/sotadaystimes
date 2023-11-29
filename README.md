@@ -1,8 +1,11 @@
 # When do SOTA Activators post their spots?
-2023-11-29
+2023-11-28
 
 The goal of this project is to find the best times to be on a SOTA
 summit to have a summit-to-summit contact.
+
+There is a GitHub Actions script that scrapes the SOTA API every 72 h
+(the maximum available) and stores the data here.
 
 ``` r
 library(httr2)
@@ -20,10 +23,43 @@ most_recent_file <-
 resp_spot <- readRDS(most_recent_file)
 
 # getting spots is documented in the R script file
+
+list_of_rds_files <- 
+  list.files("data/", 
+              full.names = TRUE)
+
+resp_spot_all <-  
+  map(list_of_rds_files, read_rds)
+
+resp_spot <-  
+unlist(resp_spot_all, recursive = FALSE)
+
+spot_tbl <- 
+resp_spot %>% 
+  tibble(resp_spot = resp_spot) %>% 
+  unnest_wider(resp_spot) %>% 
+  select(-.)
+
+start_time <- 
+as_datetime(str_replace_all(min(spot_tbl$timeStamp), 
+                            "T", " "),
+            format = "%Y-%m-%d %H:%M:%OS", 
+            tz = "GMT")
+end_time <- 
+  as_datetime(str_replace_all(max(spot_tbl$timeStamp), 
+                            "T", " "),
+            format = "%Y-%m-%d %H:%M:%OS", 
+            tz = "GMT")
+
+# formatted combined date, time, and time zone using str_glue() function
+
+start_time <- str_glue("{format(start_time, format = '%A, %B %d %Y, %z  %Z, ')}{format(start_time, format = '%H:%M:%S')}")
+
+end_time <- str_glue("{format(end_time, format = '%A, %B %d %Y, %z  %Z, ')}{format(end_time, format = '%H:%M:%S')}")
 ```
 
-These data are from the 72 h leading up to 2023-11-29 01:07. The data
-are collected by a GitHub Action that is set to run every 72 h.
+We have 26,793 spots, from Wednesday, November 01 2023, +0000 GMT,
+22:43:07 to Wednesday, November 29 2023, +0000 GMT, 01:04:01.
 
 ``` r
 # get associations so we can get their time zones via lat-long
@@ -54,12 +90,6 @@ assoc_tbl_tz <-
          timezone = tz_lookup_coords(lat = minLat, 
                                      lon = minLong, 
                                      method = "accurate")) 
-
-spot_tbl <- 
-resp_spot %>% 
-  tibble(resp_spot = resp_spot) %>% 
-  unnest_wider(resp_spot) %>% 
-  select(-.)
 ```
 
 Now we have the time zone for each Association, let’s compute the local
@@ -117,8 +147,7 @@ spot_tbl_tz_local  %>%
   ggtitle("All spots on all modes in all Associations")
 ```
 
-<img src="README_files/figure-commonmark/fig-by-day-1.png"
-id="fig-by-day" alt="Figure 1: Frequency of spots by day of the week" />
+![](README_files/figure-commonmark/fig-by-day-1.png)
 
 ``` r
 spot_tbl_tz_local  %>% 
@@ -131,12 +160,10 @@ spot_tbl_tz_local  %>%
   ggtitle("All spots on all modes in all Associations")
 ```
 
-<img src="README_files/figure-commonmark/fig-by-hour-1.png"
-id="fig-by-hour"
-alt="Figure 2: Frequency of spots by time of the day in the activator’s time zone" />
+![](README_files/figure-commonmark/fig-by-hour-1.png)
 
 Midday is peak hour for spotting. Fifty percent of spots were posted
-between 10:51 and 13:51 in the activator’s local time zone.
+between 10:49 and 13:55 in the activator’s local time zone.
 
 ``` r
 small_x_labels <- 3
@@ -154,9 +181,7 @@ ggplot() +
   theme(axis.text=element_text(size = small_x_labels))
 ```
 
-<img src="README_files/figure-commonmark/fig-by-hour-day-1.png"
-id="fig-by-hour-day"
-alt="Figure 3: Frequency of spots by time in the activator’s time zone and day of the week" />
+![](README_files/figure-commonmark/fig-by-hour-day-1.png)
 
 Midday seems to be preferred regardless of the day of the week.
 
@@ -164,21 +189,21 @@ Midday seems to be preferred regardless of the day of the week.
 spot_tbl_tz_local %>% 
   add_count(associationName) %>% 
   filter(n >= 10) %>% 
+  mutate(associationName = str_replace(associationName, "-", "\n")) %>% 
   ggplot() +
   aes(local_time) +
   geom_histogram() +
   geom_vline(xintercept = fifty_perc, colour = "red") +
   theme_minimal() +
   xlab("Local time\n50% of spots occur between the red lines") +
-  facet_wrap(~ associationName, scales = "free_y") +
+  facet_wrap(~ associationName, 
+             scales = "free_y",
+             ncol = 6) +
   ggtitle("Spots by Association (for Assocs with more than 10 spots)") +
   theme(axis.text=element_text(size = small_x_labels))
 ```
 
-<img
-src="README_files/figure-commonmark/fig-by-hour-by-association-1.png"
-id="fig-by-hour-by-association"
-alt="Figure 4: Frequency of spots by time in the activator’s time zone for each Association" />
+![](README_files/figure-commonmark/fig-by-hour-by-association-1.png)
 
 Activators in Japan are spotting earlier than most others. Activators in
 Spain are generally later than average. Within the US, Arizona is where
@@ -186,9 +211,9 @@ the early spotting is, and Virginia do the late shift.
 
 ``` r
 spot_tbl_tz_local  %>% 
-  mutate(mode = toupper(mode)) %>% 
+  mutate(mode = str_squish(toupper(mode))) %>% 
   add_count(mode) %>% 
-  filter(n >= 10) %>% 
+  filter(n >= 100) %>% 
   ggplot() +
   aes(local_time) +
   geom_histogram() +
@@ -200,9 +225,7 @@ spot_tbl_tz_local  %>%
   theme(axis.text=element_text(size = small_x_labels))
 ```
 
-<img src="README_files/figure-commonmark/fig-time-and-mode-1.png"
-id="fig-time-and-mode"
-alt="Figure 5: Frequency of spots by time in the activator’s time zone and mode" />
+![](README_files/figure-commonmark/fig-time-and-mode-1.png)
 
 Activators on FM tend to be earlier than those on SSB. Perhaps many of
 these are the same people, starting their activation on FM, then
@@ -211,7 +234,7 @@ switching to SSB.
 ``` r
 spot_tbl_tz_local %>% 
   add_count(summitCode) %>% 
-  filter(n >= 10) %>% 
+  filter(n >= 50) %>% 
   ggplot() +
   aes(local_time) +
   geom_histogram() +
@@ -222,25 +245,23 @@ spot_tbl_tz_local %>%
   theme(axis.text=element_text(size = small_x_labels))
 ```
 
-<img src="README_files/figure-commonmark/fig-time-and-summit-1.png"
-id="fig-time-and-summit"
-alt="Figure 6: Frequency of spots by time in the activator’s time zone and summit" />
+![](README_files/figure-commonmark/fig-time-and-summit-1.png)
 
 ``` r
 spot_tbl_tz_local %>% 
   add_count(activatorCallsign) %>% 
-  filter(n >= 10) %>% 
+  filter(n >= 100) %>% 
   ggplot() +
   aes(local_time) +
   geom_histogram() +
   geom_vline(xintercept = fifty_perc, colour = "red") +
   theme_minimal() +
   xlab("Local time\n50% of spots occur between the red lines") +
-  facet_wrap(~ activatorCallsign, scales = "free_y") +
-  ggtitle("Spots by Activator (for Activators with more than 10 spots)") +
+  facet_wrap(~ activatorCallsign, 
+             scales = "free_y",
+             ncol = 4) +
+  ggtitle("Spots by Activator (for Activators with more than 100 spots)") +
   theme(axis.text=element_text(size = small_x_labels))
 ```
 
-<img src="README_files/figure-commonmark/fig-time-and-activator-1.png"
-id="fig-time-and-activator"
-alt="Figure 7: Frequency of spots by time in the activator’s time zone for activators with more than ten spots" />
+![](README_files/figure-commonmark/fig-time-and-activator-1.png)
