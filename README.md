@@ -1,5 +1,5 @@
 # When do SOTA Activators post their spots?
-2023-12-22
+2023-12-23
 
 The goal of this project is to find the best times to be on a SOTA
 summit to have a summit-to-summit contact.
@@ -58,8 +58,8 @@ start_time <- str_glue("{format(start_time, format = '%A, %B %d %Y, %z  %Z, ')}{
 end_time <- str_glue("{format(end_time, format = '%A, %B %d %Y, %z  %Z, ')}{format(end_time, format = '%H:%M:%S')}")
 ```
 
-We have 48,203 spots, from Wednesday, November 01 2023, +0000 GMT,
-22:43:07 to Friday, December 22 2023, +0000 GMT, 00:59:25.
+We have 48,992 spots, from Wednesday, November 01 2023, +0000 GMT,
+22:43:07 to Saturday, December 23 2023, +0000 GMT, 01:01:18.
 
 ``` r
 # get associations so we can get their time zones via lat-long
