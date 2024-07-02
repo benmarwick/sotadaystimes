@@ -1,6 +1,6 @@
 # When do SOTA Activators post their spots?
 
-2024-07-01
+2024-07-02
 
 The goal of this project is to find the best times to be on a SOTA
 summit to have a summit-to-summit contact.
@@ -59,8 +59,8 @@ start_time <- str_glue("{format(start_time, format = '%A, %B %d %Y, %z  %Z, ')}{
 end_time <- str_glue("{format(end_time, format = '%A, %B %d %Y, %z  %Z, ')}{format(end_time, format = '%H:%M:%S')}")
 ```
 
-We have 378,548 spots, from Wednesday, November 01 2023, +0000 GMT,
-22:43:07 to Monday, July 01 2024, +0000 GMT, 01:11:52.
+We have 380,939 spots, from Wednesday, November 01 2023, +0000 GMT,
+22:43:07 to Tuesday, July 02 2024, +0000 GMT, 01:04:46.
 
 ``` r
 # get associations so we can get their time zones via lat-long
@@ -148,7 +148,14 @@ spot_tbl_tz_local  %>%
   ggtitle("All spots on all modes in all Associations")
 ```
 
+<div id="fig-by-day">
+
 ![](README_files/figure-commonmark/fig-by-day-1.png)
+
+
+Figure 1: Frequency of spots by day of the week
+
+</div>
 
 ``` r
 spot_tbl_tz_local  %>% 
@@ -161,7 +168,15 @@ spot_tbl_tz_local  %>%
   ggtitle("All spots on all modes in all Associations")
 ```
 
+<div id="fig-by-hour">
+
 ![](README_files/figure-commonmark/fig-by-hour-1.png)
+
+
+Figure 2: Frequency of spots by time of the day in the activator’s time
+zone
+
+</div>
 
 Midday is peak hour for spotting. Fifty percent of spots were posted
 between 10:46 and 14:10 in the activator’s local time zone.
@@ -182,7 +197,15 @@ ggplot() +
   theme(axis.text=element_text(size = small_x_labels))
 ```
 
+<div id="fig-by-hour-day">
+
 ![](README_files/figure-commonmark/fig-by-hour-day-1.png)
+
+
+Figure 3: Frequency of spots by time in the activator’s time zone and
+day of the week
+
+</div>
 
 Midday seems to be preferred regardless of the day of the week.
 
@@ -204,7 +227,15 @@ spot_tbl_tz_local %>%
   theme(axis.text=element_text(size = small_x_labels))
 ```
 
+<div id="fig-by-hour-by-association">
+
 ![](README_files/figure-commonmark/fig-by-hour-by-association-1.png)
+
+
+Figure 4: Frequency of spots by time in the activator’s time zone for
+each Association
+
+</div>
 
 Activators in Japan are spotting earlier than most others. Activators in
 Spain are generally later than average. Within the US, Arizona is where
@@ -226,7 +257,15 @@ spot_tbl_tz_local  %>%
   theme(axis.text=element_text(size = small_x_labels))
 ```
 
+<div id="fig-time-and-mode">
+
 ![](README_files/figure-commonmark/fig-time-and-mode-1.png)
+
+
+Figure 5: Frequency of spots by time in the activator’s time zone and
+mode
+
+</div>
 
 Activators on FM tend to be earlier than those on SSB. Perhaps many of
 these are the same people, starting their activation on FM, then
@@ -246,7 +285,15 @@ spot_tbl_tz_local %>%
   theme(axis.text=element_text(size = small_x_labels))
 ```
 
+<div id="fig-time-and-summit">
+
 ![](README_files/figure-commonmark/fig-time-and-summit-1.png)
+
+
+Figure 6: Frequency of spots by time in the activator’s time zone and
+summit
+
+</div>
 
 ``` r
 spot_tbl_tz_local %>% 
@@ -265,4 +312,12 @@ spot_tbl_tz_local %>%
   theme(axis.text=element_text(size = small_x_labels))
 ```
 
+<div id="fig-time-and-activator">
+
 ![](README_files/figure-commonmark/fig-time-and-activator-1.png)
+
+
+Figure 7: Frequency of spots by time in the activator’s time zone for
+activators with more than ten spots
+
+</div>
