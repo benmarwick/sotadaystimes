@@ -1,6 +1,6 @@
 # When do SOTA Activators post their spots?
 
-2024-11-25
+2024-11-26
 
 The goal of this project is to find the best times to be on a SOTA
 summit to have a summit-to-summit contact.
@@ -59,8 +59,8 @@ start_time <- str_glue("{format(start_time, format = '%A, %B %d %Y, %z  %Z, ')}{
 end_time <- str_glue("{format(end_time, format = '%A, %B %d %Y, %z  %Z, ')}{format(end_time, format = '%H:%M:%S')}")
 ```
 
-We have 629,202 spots, from Wednesday, November 01 2023, +0000 GMT,
-22:43:07 to Monday, November 25 2024, +0000 GMT, 01:26:50.
+We have 630,394 spots, from Wednesday, November 01 2023, +0000 GMT,
+22:43:07 to Tuesday, November 26 2024, +0000 GMT, 00:35:28.
 
 ``` r
 # get associations so we can get their time zones via lat-long
@@ -152,7 +152,6 @@ spot_tbl_tz_local  %>%
 
 ![](README_files/figure-commonmark/fig-by-day-1.png)
 
-
 Figure 1: Frequency of spots by day of the week
 
 </div>
@@ -171,7 +170,6 @@ spot_tbl_tz_local  %>%
 <div id="fig-by-hour">
 
 ![](README_files/figure-commonmark/fig-by-hour-1.png)
-
 
 Figure 2: Frequency of spots by time of the day in the activator’s time
 zone
@@ -200,7 +198,6 @@ ggplot() +
 <div id="fig-by-hour-day">
 
 ![](README_files/figure-commonmark/fig-by-hour-day-1.png)
-
 
 Figure 3: Frequency of spots by time in the activator’s time zone and
 day of the week
@@ -231,7 +228,6 @@ spot_tbl_tz_local %>%
 
 ![](README_files/figure-commonmark/fig-by-hour-by-association-1.png)
 
-
 Figure 4: Frequency of spots by time in the activator’s time zone for
 each Association
 
@@ -261,7 +257,6 @@ spot_tbl_tz_local  %>%
 
 ![](README_files/figure-commonmark/fig-time-and-mode-1.png)
 
-
 Figure 5: Frequency of spots by time in the activator’s time zone and
 mode
 
@@ -289,7 +284,6 @@ spot_tbl_tz_local %>%
 
 ![](README_files/figure-commonmark/fig-time-and-summit-1.png)
 
-
 Figure 6: Frequency of spots by time in the activator’s time zone and
 summit
 
@@ -315,7 +309,6 @@ spot_tbl_tz_local %>%
 <div id="fig-time-and-activator">
 
 ![](README_files/figure-commonmark/fig-time-and-activator-1.png)
-
 
 Figure 7: Frequency of spots by time in the activator’s time zone for
 activators with more than ten spots
