@@ -1,6 +1,6 @@
 # When do SOTA Activators post their spots?
 
-2026-04-30
+2026-05-01
 
 The goal of this project is to find the best times to be on a SOTA
 summit to have a summit-to-summit contact.
@@ -59,8 +59,8 @@ start_time <- str_glue("{format(start_time, format = '%A, %B %d %Y, %z  %Z, ')}{
 end_time <- str_glue("{format(end_time, format = '%A, %B %d %Y, %z  %Z, ')}{format(end_time, format = '%H:%M:%S')}")
 ```
 
-We have 1,460,998 spots, from Wednesday, November 01 2023, +0000 GMT,
-22:43:07 to Thursday, April 30 2026, +0000 GMT, 03:23:01.
+We have 1,462,809 spots, from Wednesday, November 01 2023, +0000 GMT,
+22:43:07 to Friday, May 01 2026, +0000 GMT, 03:31:06.
 
 ``` r
 # get associations so we can get their time zones via lat-long
@@ -177,7 +177,7 @@ zone
 </div>
 
 Midday is peak hour for spotting. Fifty percent of spots were posted
-between 10:45 and 14:07 in the activator’s local time zone.
+between 10:44 and 14:07 in the activator’s local time zone.
 
 ``` r
 small_x_labels <- 3
