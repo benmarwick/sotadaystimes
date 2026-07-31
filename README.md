@@ -1,6 +1,6 @@
 # When do SOTA Activators post their spots?
 
-2026-07-30
+2026-07-31
 
 The goal of this project is to find the best times to be on a SOTA
 summit to have a summit-to-summit contact.
@@ -59,8 +59,8 @@ start_time <- str_glue("{format(start_time, format = '%A, %B %d %Y, %z  %Z, ')}{
 end_time <- str_glue("{format(end_time, format = '%A, %B %d %Y, %z  %Z, ')}{format(end_time, format = '%H:%M:%S')}")
 ```
 
-We have 1,635,926 spots, from Wednesday, November 01 2023, +0000 GMT,
-22:43:07 to Thursday, July 30 2026, +0000 GMT, 01:18:35.
+We have 1,637,562 spots, from Wednesday, November 01 2023, +0000 GMT,
+22:43:07 to Friday, July 31 2026, +0000 GMT, 02:42:56.
 
 ``` r
 # get associations so we can get their time zones via lat-long
